@@ -2,6 +2,18 @@
 
 A web-based Student Result Management System built with Flask, SQLite, and AI-powered grade prediction using NumPy.
 
+## Screenshots
+
+### Home Page
+![Home Page](static/images/home.png)
+
+### Student Detail & AI Prediction
+![Student Detail](static/images/student_detail.png)
+![AI Prediction](static/images/ai_predictor.png)
+
+### Search Student
+![Search](static/images/search.png)
+
 ## Features
 
 - Add, edit, and delete students
