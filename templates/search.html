@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header bg-primary text-white">
+                <h4 class="mb-0">
+                    <i class="bi bi-search me-2"></i>Search Student by Roll Number
+                </h4>
+            </div>
+            <div class="card-body p-4">
+                <form method="POST">
+                    <div class="mb-3">
+                        <label class="form-label fw-bold">Enter Roll Number</label>
+                        <div class="input-group">
+                            <input type="text" name="roll_number" class="form-control"
+                                   placeholder="e.g. BSF23006613" required>
+                            <button type="submit" class="btn btn-primary">
+                                <i class="bi bi-search me-1"></i>Search
+                            </button>
+                        </div>
+                    </div>
+                </form>
+
+                {% if error %}
+                <div class="alert alert-danger mt-3">
+                    <i class="bi bi-exclamation-circle me-2"></i>{{ error }}
+                </div>
+                {% endif %}
+
+                {% if student %}
+                <div class="card mt-4 border-success">
+                    <div class="card-header bg-success text-white">
+                        <h5 class="mb-0">
+                            <i class="bi bi-person-check me-2"></i>Student Found!
+                        </h5>
+                    </div>
+                    <div class="card-body">
+                        <p><strong>Name:</strong> {{ student.name }}</p>
+                        <p><strong>Roll No:</strong> {{ student.roll_number }}</p>
+                        <p><strong>Class:</strong> {{ student.class_name }}</p>
+                        <p><strong>Total Subjects:</strong> {{ student.results|length }}</p>
+                        <a href="/student/{{ student.id }}" class="btn btn-primary w-100">
+                            <i class="bi bi-eye me-1"></i>View Full Details
+                        </a>
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

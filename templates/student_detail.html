@@ -1,0 +1,120 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-4 mb-4">
+        <div class="card">
+            <div class="card-header bg-primary text-white">
+                <h5 class="mb-0"><i class="bi bi-person-circle me-2"></i>Student Info</h5>
+            </div>
+            <div class="card-body">
+                <p><strong>Name:</strong> {{ student.name }}</p>
+                <p><strong>Roll No:</strong> {{ student.roll_number }}</p>
+                <p><strong>Class:</strong> {{ student.class_name }}</p>
+                <p><strong>Total Subjects:</strong> {{ results|length }}</p>
+                <a href="/add_result/{{ student.id }}" class="btn btn-success w-100">
+                    <i class="bi bi-journal-plus me-1"></i>Add Result
+                </a>
+                <a href="/edit_student/{{ student.id }}" class="btn btn-warning w-100 mt-2">
+                    <i class="bi bi-pencil-square me-1"></i>Edit Student
+                </a>
+            </div>
+        </div>
+
+        {% if prediction %}
+        <div class="card mt-4 prediction-card">
+            <div class="card-header bg-info text-white">
+                <h5 class="mb-0"><i class="bi bi-robot me-2"></i>AI Grade Prediction</h5>
+            </div>
+            <div class="card-body">
+                <div class="text-center mb-3">
+                    <span class="grade-badge bg-primary text-white">
+                        {{ prediction.predicted_grade }}
+                    </span>
+                </div>
+                <p><strong>Current Average:</strong> {{ prediction.current_avg }}%</p>
+                <p><strong>Predicted Score:</strong> {{ prediction.predicted_percentage }}%</p>
+                <p><strong>Trend:</strong> {{ prediction.trend }}</p>
+                <div class="alert alert-info py-2 mb-0">
+                    <small>{{ prediction.message }}</small>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+
+    <div class="col-md-8 mb-4">
+        <div class="card">
+            <div class="card-header bg-white">
+                <h5 class="mb-0"><i class="bi bi-table me-2"></i>Results</h5>
+            </div>
+            <div class="card-body">
+                {% if results %}
+                <div class="table-responsive">
+                    <table class="table table-hover align-middle">
+                        <thead class="table-light">
+                            <tr>
+                                <th>Subject</th>
+                                <th>Marks</th>
+                                <th>Percentage</th>
+                                <th>Grade</th>
+                                <th>Semester</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for result in results %}
+                            <tr>
+                                <td><i class="bi bi-book me-1 text-primary"></i>{{ result.subject }}</td>
+                                <td>{{ result.marks_obtained }} / {{ result.total_marks }}</td>
+                                <td>
+                                    <div class="progress" style="height: 8px;">
+                                        <div class="progress-bar
+                                            {% if result.percentage >= 80 %}bg-success
+                                            {% elif result.percentage >= 60 %}bg-warning
+                                            {% else %}bg-danger{% endif %}"
+                                            style="width: {{ result.percentage }}%">
+                                        </div>
+                                    </div>
+                                    <small>{{ result.percentage|round(1) }}%</small>
+                                </td>
+                                <td>
+                                    <span class="badge
+                                        {% if result.grade == 'A+' or result.grade == 'A' %}bg-success
+                                        {% elif result.grade == 'B' %}bg-primary
+                                        {% elif result.grade == 'C' %}bg-warning text-dark
+                                        {% else %}bg-danger{% endif %}">
+                                        {{ result.grade }}
+                                    </span>
+                                </td>
+                                <td><span class="badge bg-secondary">{{ result.semester }}</span></td>
+                                <td>
+                                    <a href="/delete_result/{{ result.id }}"
+                                       class="btn btn-danger btn-sm"
+                                       onclick="return confirm('Are you sure you want to delete this result?')">
+                                        <i class="bi bi-trash"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                {% else %}
+                <div class="text-center py-4">
+                    <i class="bi bi-inbox display-4 text-muted"></i>
+                    <p class="text-muted mt-2">No results added yet.</p>
+                    <a href="/add_result/{{ student.id }}" class="btn btn-success">
+                        <i class="bi bi-journal-plus me-1"></i>Add First Result
+                    </a>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<a href="/" class="btn btn-outline-secondary mb-4">
+    <i class="bi bi-arrow-left me-1"></i>Back to Home
+</a>
+{% endblock %}

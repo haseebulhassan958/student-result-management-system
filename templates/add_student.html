@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header bg-primary text-white">
+                <h4 class="mb-0">
+                    <i class="bi bi-person-plus me-2"></i>Add New Student
+                </h4>
+            </div>
+            <div class="card-body p-4">
+                <form method="POST">
+                    <div class="mb-3">
+                        <label class="form-label fw-bold">Student Name</label>
+                        <input type="text" name="name" class="form-control"
+                               placeholder="Enter student name" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label fw-bold">Roll Number</label>
+                        <input type="text" name="roll_number" class="form-control"
+                               placeholder="e.g. BS-IT-001" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label fw-bold">Class</label>
+                        <select name="class_name" class="form-select" required>
+                            <option value="">-- Select Class --</option>
+                            <option value="BS-IT">BS-IT</option>
+                            <option value="BS-CS">BS-CS</option>
+                            <option value="BS-SE">BS-SE</option>
+                            <option value="MCS">MCS</option>
+                            <option value="MIT">MIT</option>
+                        </select>
+                    </div>
+
+                    <div class="d-grid gap-2">
+                        <button type="submit" class="btn btn-primary">
+                            <i class="bi bi-check-circle me-1"></i>Add Student
+                        </button>
+                        <a href="/" class="btn btn-outline-secondary">
+                            <i class="bi bi-arrow-left me-1"></i>Back to Home
+                        </a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
