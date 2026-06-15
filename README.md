@@ -23,6 +23,8 @@ A web-based Student Result Management System built with Flask, SQLite, and AI-po
 - AI-powered next semester grade prediction
 - Flash notifications for all actions
 - Fully responsive UI with Bootstrap 5
+- Search student by roll number
+- Custom CSS styling with smooth animations
 
 ## Tech Stack
 
@@ -51,12 +53,13 @@ student_result_system/
 │   ├── edit_student.html   # Edit student form
 │   ├── add_result.html     # Add result form
 │   └── student_detail.html # Student detail and AI prediction
+│   └── search.html         # Search student by roll number
 │
 ├── static/
-│   ├── css/                # Custom stylesheets
+│   ├── css/
+│   │   └── style.css       # Custom CSS styling
+│   ├── images/             # Project screenshots
 │   └── js/                 # Custom JavaScript
-│
-└── venv/                   # Virtual environment
 ```
 
 ## Installation and Setup
